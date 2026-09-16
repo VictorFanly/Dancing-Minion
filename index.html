@@ -82,17 +82,23 @@
 
                     <div class="box-body">
 
-                        <div class="profile-picture">
-                            🌸
-                        </div>
+                        <div class="profile-picture" id="profilePicture">
+    🌸
+</div>
 
-                        <div class="profile-name">
-                            Kaygabbz
-                        </div>
+<label for="profileInput" class="profile-change">
+    ✿ trocar foto ✿
+</label>
 
-                        <div class="profile-status">
-                            online ●
-                        </div>
+<input
+    type="file"
+    id="profileInput"
+    class="profile-input"
+    accept="image/*"
+>
+
+<div class="profile-name">Kaygabbz</div>
+<div class="profile-status">online ●</div>
 
                     </div>
 
@@ -381,6 +387,59 @@
     </div>
 
 
+<!-- =========================================================
+     VISUALIZADOR DE FOTO
+========================================================= -->
+
+<div
+    id="photoViewer"
+    class="photo-viewer"
+>
+
+    <div class="photo-viewer-content">
+
+        <div class="photo-viewer-header">
+
+            ♥ VISUALIZANDO FOTINHA ♥
+
+            <span
+                id="closePhotoViewer"
+                class="close-photo-viewer"
+            >
+                [X]
+            </span>
+
+        </div>
+
+
+        <div class="photo-viewer-image-area">
+
+            <img
+                id="viewerImage"
+                src=""
+                alt="Foto ampliada"
+            >
+
+        </div>
+
+
+        <div
+            id="viewerDate"
+            class="photo-viewer-date"
+        ></div>
+
+
+        <div
+            id="viewerBack"
+            class="photo-viewer-back"
+        >
+            « voltar para minhas fotos
+        </div>
+
+    </div>
+
+</div>
+
     <!-- =========================================================
          MINION
     ========================================================== -->
@@ -405,6 +464,7 @@
 
     <!-- JAVASCRIPT -->
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 
 </body>
