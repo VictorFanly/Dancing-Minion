@@ -1,0 +1,1642 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333;
+
+    background-color: #d5e3f1;
+
+    /*
+        Fundo propositalmente simples.
+        A ideia é parecer uma página antiga,
+        e não um site moderno cheio de efeitos.
+    */
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.18) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(255,255,255,.15) 1px,
+            transparent 1px
+        );
+
+    background-size: 20px 20px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   GLITTER
+========================================================= */
+
+.glitter {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    font-size: 21px;
+
+    user-select: none;
+
+    animation:
+        glitterFloat 5s ease-in-out infinite,
+        glitterBlink 1.8s infinite;
+}
+
+.g1 {
+    top: 9%;
+    left: 2%;
+}
+
+.g2 {
+    top: 25%;
+    right: 2%;
+
+    animation-delay: .4s;
+}
+
+.g3 {
+    top: 53%;
+    left: 1%;
+
+    animation-delay: .8s;
+}
+
+.g4 {
+    top: 72%;
+    right: 3%;
+
+    animation-delay: 1.1s;
+}
+
+.g5 {
+    top: 42%;
+    right: 12%;
+
+    animation-delay: .3s;
+}
+
+@keyframes glitterFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes glitterBlink {
+
+    0%,
+    100% {
+        opacity: .45;
+    }
+
+    50% {
+        opacity: 1;
+
+        filter:
+            drop-shadow(0 0 3px white)
+            drop-shadow(0 0 5px #ff69b4);
+    }
+}
+
+
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
+
+.top-bar {
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    background:
+        linear-gradient(
+            #7398c5 0%,
+            #5279aa 48%,
+            #3f6495 52%,
+            #345782 100%
+        );
+
+    border-top: 1px solid #91afd0;
+
+    border-bottom: 1px solid #294a75;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.35);
+}
+
+.top-bar-left {
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px #29486f;
+}
+
+.top-bar-right {
+    text-decoration: underline;
+
+    cursor: pointer;
+
+    text-shadow:
+        1px 1px #29486f;
+}
+
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
+.page {
+    width: 920px;
+
+    max-width: calc(100% - 24px);
+
+    margin: 12px auto 40px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    padding: 12px 16px 10px;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #f5f8fc
+        );
+
+    border:
+        1px solid #9aaec4;
+
+    border-bottom:
+        3px solid #6686aa;
+
+    /*
+        Menos arredondado para parecer
+        uma interface antiga.
+    */
+    border-radius: 4px 4px 0 0;
+
+    box-shadow:
+        1px 2px 4px rgba(0,0,0,.22);
+}
+
+.header h1 {
+    margin: 0;
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    color: #315b91;
+
+    text-shadow:
+        1px 1px #fff;
+}
+
+.header h1 span {
+    color: #d83c84;
+}
+
+.subtitle {
+    margin-top: 3px;
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.content {
+    display: grid;
+
+    grid-template-columns: 190px 1fr;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   CAIXAS
+========================================================= */
+
+.box {
+    margin-bottom: 10px;
+
+    background: #fff;
+
+    border:
+        1px solid #9eafc2;
+
+    border-radius: 3px;
+
+    box-shadow:
+        1px 2px 3px rgba(0,0,0,.20);
+
+    overflow: hidden;
+}
+
+.box-title {
+    padding: 5px 8px;
+
+    background:
+        linear-gradient(
+            #789ac4,
+            #567baa
+        );
+
+    border-bottom:
+        1px solid #3f628d;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px #385778;
+}
+
+.box-body {
+    padding: 9px;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #fafbfd
+        );
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.profile-picture {
+    width: 105px;
+    height: 105px;
+
+    margin: 3px auto 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        #eeeeee;
+
+    border:
+        1px solid #999;
+
+    outline:
+        3px double #d2d2d2;
+
+    font-size: 40px;
+
+    box-shadow:
+        inset 0 0 0 1px white;
+}
+
+.profile-name {
+    text-align: center;
+
+    color: #315b91;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+.profile-status {
+    margin-top: 4px;
+
+    text-align: center;
+
+    color: #52952e;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.old-link {
+    display: block;
+
+    padding: 4px 5px;
+
+    color: #285a96;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+
+    border-bottom:
+        1px dotted #d0d0d0;
+}
+
+.old-link:last-child {
+    border-bottom: none;
+}
+
+.old-link:hover {
+    color: #d50068;
+
+    background:
+        #fff0f8;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
+
+.main {
+    min-width: 0;
+}
+
+.welcome {
+    margin-bottom: 10px;
+
+    padding: 12px;
+
+    background: #fff;
+
+    border:
+        1px solid #9eafc2;
+
+    border-radius: 3px;
+
+    box-shadow:
+        1px 2px 3px rgba(0,0,0,.20);
+}
+
+.welcome h2 {
+    margin:
+        0 0 7px;
+
+    padding-bottom: 5px;
+
+    color: #d83c84;
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    font-size: 17px;
+
+    border-bottom:
+        1px dotted #bbb;
+}
+
+.welcome p {
+    margin: 5px 0;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload-area {
+    padding: 16px;
+
+    text-align: center;
+
+    background:
+        #fffafd;
+
+    border:
+        2px dashed #d895b5;
+
+    border-radius: 3px;
+}
+
+.upload-area:hover {
+    background: #fff5fa;
+
+    border-color: #d85b91;
+}
+
+.upload-title {
+    margin-bottom: 4px;
+
+    color: #c52d70;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+.upload-description {
+    margin-bottom: 11px;
+
+    color: #777;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   BOTÃO DE UPLOAD
+========================================================= */
+
+.file-input {
+    display: none;
+}
+
+.upload-button {
+    display: inline-block;
+
+    padding: 6px 15px;
+
+    background:
+        linear-gradient(
+            #ffabd0,
+            #e5669f
+        );
+
+    border:
+        1px solid #b83d75;
+
+    border-radius: 3px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px rgba(0,0,0,.25);
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.7),
+        0 1px 2px rgba(0,0,0,.25);
+}
+
+.upload-button:hover {
+    background:
+        linear-gradient(
+            #ffc0dc,
+            #ed76aa
+        );
+}
+
+.upload-button:active {
+    position: relative;
+
+    top: 1px;
+
+    box-shadow:
+        inset 0 1px rgba(0,0,0,.15);
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+#preview {
+    display: none;
+
+    margin-top: 12px;
+
+    padding: 7px;
+
+    background:
+        #f4f4f4;
+
+    border:
+        1px solid #aaa;
+
+    box-shadow:
+        inset 0 0 0 1px white;
+}
+
+#preview img {
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 330px;
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   GALERIA
+========================================================= */
+
+.gallery {
+    margin-top: 10px;
+
+    padding: 10px;
+
+    background: #fff;
+
+    border:
+        1px solid #9eafc2;
+
+    border-radius: 3px;
+
+    box-shadow:
+        1px 2px 3px rgba(0,0,0,.20);
+}
+
+.gallery-header {
+    margin-bottom: 9px;
+
+    padding-bottom: 5px;
+
+    color: #315b91;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    border-bottom:
+        1px dotted #aaa;
+}
+
+.gallery-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(140px, 1fr)
+        );
+
+    gap: 9px;
+}
+
+.photo-card {
+    padding: 4px;
+
+    background:
+        #f9f9f9;
+
+    border:
+        1px solid #aaa;
+
+    box-shadow:
+        1px 1px 2px rgba(0,0,0,.15);
+
+    transition:
+        transform .12s ease;
+}
+
+.photo-card:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        2px 3px 5px rgba(0,0,0,.22);
+}
+
+.photo-card img {
+    display: block;
+
+    width: 100%;
+
+    height: 145px;
+
+    object-fit: cover;
+
+    border:
+        1px solid #ccc;
+}
+
+.photo-date {
+    padding-top: 4px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MINION
+========================================================= */
+
+.minion-container {
+    position: fixed;
+
+    right: 18px;
+    bottom: 8px;
+
+    width: 180px;
+    height: 215px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    z-index: 100;
+
+    pointer-events: none;
+}
+
+.minion {
+    position: relative;
+
+    width: 125px;
+    height: 185px;
+
+    background: #ffd91a;
+
+    border:
+        4px solid #222;
+
+    border-radius:
+        55px 55px 30px 30px;
+
+    box-shadow:
+        4px 5px 0 rgba(0,0,0,.25);
+}
+
+.minion::before {
+    content: "";
+
+    position: absolute;
+
+    top: 40px;
+    left: 17px;
+
+    width: 83px;
+    height: 31px;
+
+    background: #333;
+
+    border-radius: 3px;
+}
+
+.eye {
+    position: absolute;
+
+    top: 26px;
+    left: 36px;
+
+    width: 47px;
+    height: 47px;
+
+    background: #fff;
+
+    border:
+        4px solid #333;
+
+    border-radius: 50%;
+
+    z-index: 2;
+}
+
+.eye::after {
+    content: "";
+
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    width: 14px;
+    height: 14px;
+
+    background: #222;
+
+    border-radius: 50%;
+}
+
+.mouth {
+    position: absolute;
+
+    top: 103px;
+    left: 28px;
+
+    width: 65px;
+    height: 29px;
+
+    border-bottom:
+        5px solid #222;
+
+    border-radius:
+        0 0 50px 50px;
+}
+
+.overall {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 60px;
+
+    background: #315aa8;
+
+    border-top:
+        4px solid #222;
+}
+
+
+/* =========================================================
+   DANÇA
+========================================================= */
+
+.dancing {
+    animation:
+        dance .35s infinite alternate ease-in-out;
+}
+
+@keyframes dance {
+
+    0% {
+        transform:
+            rotate(-8deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            rotate(0deg)
+            translateY(-14px);
+    }
+
+    100% {
+        transform:
+            rotate(8deg)
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+#uploadMessage {
+    display: none;
+
+    margin-top: 9px;
+
+    padding: 7px;
+
+    background:
+        #ffffcc;
+
+    border:
+        1px solid #d2d27a;
+
+    color: #666;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.footer {
+    margin-top: 12px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 9px;
+}
+
+.footer span {
+    color: #d83c84;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .page {
+        width: 100%;
+
+        max-width:
+            calc(100% - 10px);
+
+        margin-top: 6px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .minion-container {
+        right: -10px;
+        bottom: -5px;
+
+        transform: scale(.7);
+
+        transform-origin:
+            bottom right;
+    }
+
+    .gallery-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+/* =========================================================
+   PERFIL LATERAL — RODADA 2
+========================================================= */
+
+/* Coluna lateral */
+
+.sidebar {
+    font-size: 11px;
+}
+
+
+/* Caixa do perfil */
+
+.sidebar .box:first-child {
+    border-color: #8ea5bf;
+
+    box-shadow:
+        1px 2px 4px rgba(0,0,0,.22);
+}
+
+
+/* Título do perfil */
+
+.sidebar .box:first-child .box-title {
+    text-align: left;
+
+    padding-left: 9px;
+
+    background:
+        linear-gradient(
+            #82a5d0,
+            #557ba9
+        );
+}
+
+
+/* Corpo do perfil */
+
+.sidebar .box:first-child .box-body {
+    padding: 10px 8px 11px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #f6f9fc
+        );
+}
+
+
+/* =========================================================
+   FOTO DE PERFIL
+========================================================= */
+
+.profile-picture {
+    position: relative;
+
+    width: 110px;
+    height: 110px;
+
+    margin:
+        2px auto 9px;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #eeeeee 0px,
+            #eeeeee 5px,
+            #e0e0e0 5px,
+            #e0e0e0 10px
+        );
+
+    border:
+        1px solid #888;
+
+    outline:
+        3px double #c9c9c9;
+
+    box-shadow:
+        inset 0 0 0 1px #fff,
+        1px 1px 3px rgba(0,0,0,.25);
+
+    font-size: 42px;
+}
+
+
+/*
+    Pequeno detalhe que lembra aqueles
+    indicadores/bordas de foto antiga.
+*/
+
+.profile-picture::after {
+    content: "foto";
+
+    position: absolute;
+
+    left: 3px;
+    bottom: 3px;
+
+    padding: 1px 4px;
+
+    background:
+        rgba(0,0,0,.55);
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   NOME
+========================================================= */
+
+.profile-name {
+    margin-top: 4px;
+
+    color: #315b91;
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+.profile-name:hover {
+    color: #d50068;
+}
+
+
+/* =========================================================
+   STATUS ONLINE
+========================================================= */
+
+.profile-status {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    padding: 2px 7px;
+
+    background:
+        #eef8e9;
+
+    border:
+        1px solid #b5d4a8;
+
+    color: #4c8b32;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    border-radius: 2px;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES EXTRAS DO PERFIL
+   Criadas visualmente sem alterar o HTML.
+========================================================= */
+
+.sidebar .box:first-child .box-body::after {
+    content:
+        "♥ 1 amigo (Fanly do Zap') •  43 scraps (Dele kk!')";
+
+    display: block;
+
+    margin-top: 9px;
+
+    padding-top: 7px;
+
+    border-top:
+        1px dotted #bbb;
+
+    color: #777;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   MENU LATERAL
+========================================================= */
+
+.sidebar .box:nth-child(2) .box-title {
+    background:
+        linear-gradient(
+            #789ac4,
+            #5277a5
+        );
+}
+
+.sidebar .box:nth-child(2) .box-body {
+    padding: 5px;
+}
+
+
+/* Links com aparência de menu antigo */
+
+.sidebar .box:nth-child(2) .old-link {
+    position: relative;
+
+    padding:
+        5px 6px 5px 8px;
+
+    border-bottom:
+        1px dotted #c8c8c8;
+
+    background:
+        #fff;
+
+    font-size: 11px;
+}
+
+.sidebar .box:nth-child(2) .old-link:hover {
+    padding-left: 12px;
+
+    background:
+        #fff1f8;
+}
+
+
+/* =========================================================
+   FRASE DO DIA
+========================================================= */
+
+.sidebar .box:nth-child(3) .box-title {
+    background:
+        linear-gradient(
+            #e49bbd,
+            #c96691
+        );
+
+    border-bottom-color:
+        #a94b73;
+}
+
+.sidebar .box:nth-child(3) .box-body {
+    padding: 10px 9px;
+
+    background:
+        #fffafd;
+
+    text-align: center;
+
+    color: #666;
+
+    line-height: 1.5;
+}
+
+.sidebar .box:nth-child(3) i {
+    display: block;
+
+    color: #777;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PEQUENO DETALHE ORKUT
+========================================================= */
+
+.sidebar .box:nth-child(3)::after {
+    content:
+        "~*~ ♥ ♥ ♥ ~*~";
+
+    display: block;
+
+    padding:
+        0 0 5px;
+
+    text-align: center;
+
+    color: #e38aae;
+
+    font-size: 9px;
+}
+
+/* =========================================================
+   AMIGOS
+========================================================= */
+
+.friends-box {
+    padding: 8px;
+
+    text-align: center;
+}
+
+.friend {
+    display: inline-block;
+
+    width: 100px;
+
+    padding: 5px;
+
+    cursor: pointer;
+}
+
+.friend-picture {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 5px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eeeeee;
+
+    border:
+        1px solid #999;
+
+    outline:
+        2px solid #e0e0e0;
+
+    font-size: 27px;
+
+    box-shadow:
+        inset 0 0 0 1px #fff;
+}
+
+.friend-name {
+    color: #285a96;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.friend:hover .friend-name {
+    color: #d50068;
+}
+
+.friend:hover .friend-picture {
+    border-color: #d58aaa;
+}
+
+/* =========================================================
+   DEPOIMENTOS
+========================================================= */
+
+.testimonials {
+    margin-top: 10px;
+
+    padding: 10px;
+
+    background: #fff;
+
+    border:
+        1px solid #9eafc2;
+
+    border-radius: 3px;
+
+    box-shadow:
+        1px 2px 3px rgba(0,0,0,.20);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.testimonials-header {
+    margin-bottom: 10px;
+
+    padding: 6px 8px;
+
+    background:
+        linear-gradient(
+            #e49bbd,
+            #c96691
+        );
+
+    border:
+        1px solid #a94b73;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px #8c3d60;
+}
+
+
+/* =========================================================
+   DEPOIMENTO
+========================================================= */
+
+.testimonial {
+    margin-bottom: 9px;
+
+    border:
+        1px solid #c7c7c7;
+
+    background:
+        #fafafa;
+
+    box-shadow:
+        1px 1px 2px rgba(0,0,0,.10);
+}
+
+.testimonial:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   CABEÇALHO DO DEPOIMENTO
+========================================================= */
+
+.testimonial-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        5px 7px;
+
+    background:
+        linear-gradient(
+            #f2f2f2,
+            #e5e5e5
+        );
+
+    border-bottom:
+        1px solid #ccc;
+}
+
+.testimonial-name {
+    color: #285a96;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+.testimonial-name:hover {
+    color: #d50068;
+}
+
+.testimonial-date {
+    color: #999;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+.testimonial-message {
+    padding: 9px;
+
+    background: #fff;
+
+    color: #444;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LINKS DO DEPOIMENTO
+========================================================= */
+
+.testimonial-footer {
+    padding:
+        4px 7px;
+
+    background:
+        #f7f7f7;
+
+    border-top:
+        1px dotted #ccc;
+
+    color: #777;
+
+    font-size: 9px;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+.testimonial-footer:hover {
+    color: #d50068;
+}
+
+/* =========================================================
+   GALERIA — ESTILO ÁLBUM ANTIGO
+========================================================= */
+
+.gallery {
+    padding: 10px;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #f7f9fc
+        );
+
+    border:
+        1px solid #8fa4bc;
+
+    box-shadow:
+        1px 2px 4px rgba(0,0,0,.22);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.gallery-header {
+    margin: -10px -10px 10px;
+
+    padding: 6px 9px;
+
+    background:
+        linear-gradient(
+            #789ac4,
+            #5277a5
+        );
+
+    border-bottom:
+        1px solid #3f628d;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px #385778;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.gallery-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(145px, 1fr)
+        );
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   FOTO
+========================================================= */
+
+.photo-card {
+    position: relative;
+
+    padding: 6px 6px 8px;
+
+    background:
+        #fff;
+
+    border:
+        1px solid #aaa;
+
+    box-shadow:
+        1px 2px 3px rgba(0,0,0,.22);
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+
+/* Pequena variação nas fotos */
+
+.photo-card:nth-child(2n) {
+    transform:
+        rotate(1deg);
+}
+
+.photo-card:nth-child(3n) {
+    transform:
+        rotate(-1deg);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.photo-card:hover {
+    transform:
+        rotate(0deg)
+        translateY(-3px);
+
+    box-shadow:
+        2px 4px 7px rgba(0,0,0,.28);
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
+.photo-card img {
+    display: block;
+
+    width: 100%;
+
+    height: 145px;
+
+    object-fit: cover;
+
+    border:
+        1px solid #bbb;
+
+    background:
+        #eee;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES
+========================================================= */
+
+.photo-date {
+    padding-top: 5px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PEQUENOS DETALHES DE ÁLBUM
+========================================================= */
+
+.photo-card::after {
+    content:
+        "ver foto";
+
+    display: block;
+
+    margin-top: 4px;
+
+    text-align: center;
+
+    color: #285a96;
+
+    font-size: 9px;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+.photo-card:hover::after {
+    color: #d50068;
+}
