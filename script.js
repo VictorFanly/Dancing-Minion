@@ -15,6 +15,8 @@ const supabaseClient = supabase.createClient(
    ELEMENTOS DA PÁGINA
 ========================================================= */
 
+const photoCount = document.getElementById("photoCount");
+
 const photoInput =
     document.getElementById("photoInput");
 
@@ -219,6 +221,8 @@ photoInput.addEventListener("change", async function () {
             publicURL
         );
 
+        atualizarContadorFotos();
+
 
         /* =================================================
            5. MENSAGEM DE SUCESSO
@@ -289,28 +293,16 @@ async function atualizarFotoPerfil(file) {
 
         const caminhoPerfil = "profile/profile.jpg";
 
-        // Tenta remover a foto anterior.
-        // Se ela ainda não existir, podemos continuar normalmente.
-        const { error: deleteError } =
+        // Atualiza o arquivo que já existe
+        const { error: updateError } =
             await supabaseClient.storage
                 .from("photos")
-                .remove([caminhoPerfil]);
-
-        if (deleteError) {
-            console.warn("Aviso ao remover foto anterior:", deleteError);
-        }
-
-        // Faz um INSERT novo, sem upsert.
-        const { error: uploadError } =
-            await supabaseClient.storage
-                .from("photos")
-                .upload(caminhoPerfil, file, {
-                    cacheControl: "3600",
-                    upsert: false
+                .update(caminhoPerfil, file, {
+                    cacheControl: "3600"
                 });
 
-        if (uploadError) {
-            throw uploadError;
+        if (updateError) {
+            throw updateError;
         }
 
         const { data } =
@@ -318,6 +310,7 @@ async function atualizarFotoPerfil(file) {
                 .from("photos")
                 .getPublicUrl(caminhoPerfil);
 
+        // Evita o cache do navegador
         const publicURL = `${data.publicUrl}?v=${Date.now()}`;
 
         profilePicture.innerHTML = "";
@@ -331,10 +324,24 @@ async function atualizarFotoPerfil(file) {
     } catch (error) {
         console.error("Erro ao atualizar foto de perfil:", error);
 
-        profilePicture.innerHTML = "🌸";
+        // Tenta manter a foto que já estava sendo exibida
+        carregarFotoPerfil();
 
         alert("Não foi possível atualizar a foto de perfil.");
     }
+}
+
+/* =========================================================
+   ATUALIZAR CONTADOR
+========================================================= */
+
+function atualizarContadorFotos() {
+
+    const quantidade =
+        gallery.querySelectorAll(".photo-card").length;
+
+    photoCount.textContent =
+        `${quantidade} FOTINHA${quantidade === 1 ? "" : "S"}`;
 }
 
 /* =========================================================
@@ -472,45 +479,29 @@ async function carregarFotos() {
                     }
                 );
 
-
         if (error) {
-
             throw error;
-
         }
 
-
-        /* -------------------------------------------------
-           Se não houver fotos
-        ------------------------------------------------- */
-
-        if (!data || data.length === 0) {
-
-            return;
-
-        }
-
-
-        /* -------------------------------------------------
-           Remove a foto de exemplo do HTML
-        ------------------------------------------------- */
-
+        // Limpa a galeria antes de carregar
         gallery.innerHTML = "";
 
+        // Adiciona as fotos salvas
+        if (data && data.length > 0) {
 
-        /* -------------------------------------------------
-           Adiciona as fotos salvas
-        ------------------------------------------------- */
+            data.forEach(function (foto) {
 
-        data.forEach(function (foto) {
+                adicionarFotoSalva(
+                    foto.url,
+                    foto.data_upload
+                );
 
-            adicionarFotoSalva(
-                foto.url,
-                foto.data_upload
-            );
+            });
 
-        });
+        }
 
+        // Atualiza o contador SOMENTE depois de carregar tudo
+        atualizarContadorFotos();
 
     } catch (error) {
 
@@ -519,8 +510,10 @@ async function carregarFotos() {
             error
         );
 
+        // Mesmo se não houver fotos ou ocorrer erro,
+        // mantém o contador sincronizado
+        atualizarContadorFotos();
     }
-
 }
 
 
@@ -661,20 +654,231 @@ carregarFotos();
    ABRIR VISUALIZADOR
 ========================================================= */
 
+let fotoAtual = 0;
+
+let listaFotos = [];
+
+
+/* =========================================================
+   ATUALIZAR LISTA DE FOTOS
+========================================================= */
+
+function atualizarListaFotos() {
+
+    const cards =
+        gallery.querySelectorAll(".photo-card");
+
+    listaFotos = [];
+
+    cards.forEach(function (card) {
+
+        const imagem =
+            card.querySelector("img");
+
+        const data =
+            card.querySelector(".photo-date");
+
+        if (!imagem) {
+            return;
+        }
+
+        listaFotos.push({
+            url: imagem.src,
+            data: data
+                ? data.textContent
+                : ""
+        });
+
+    });
+}
+
+
+/* =========================================================
+   CRIAR BOTÕES DE NAVEGAÇÃO
+========================================================= */
+
+const viewerNavigation =
+    document.createElement("div");
+
+viewerNavigation.className =
+    "viewer-navigation";
+
+
+const viewerPrevious =
+    document.createElement("button");
+
+viewerPrevious.className =
+    "viewer-nav-button viewer-previous";
+
+viewerPrevious.textContent =
+    "‹";
+
+
+const viewerNext =
+    document.createElement("button");
+
+viewerNext.className =
+    "viewer-nav-button viewer-next";
+
+viewerNext.textContent =
+    "›";
+
+
+const viewerPosition =
+    document.createElement("div");
+
+viewerPosition.className =
+    "viewer-position";
+
+
+viewerNavigation.appendChild(
+    viewerPrevious
+);
+
+viewerNavigation.appendChild(
+    viewerPosition
+);
+
+viewerNavigation.appendChild(
+    viewerNext
+);
+
+photoViewer.appendChild(
+    viewerNavigation
+);
+
+
+/* =========================================================
+   MOSTRAR FOTO ATUAL
+========================================================= */
+
+function mostrarFotoAtual() {
+
+    if (
+        listaFotos.length === 0
+    ) {
+        return;
+    }
+
+    const foto =
+        listaFotos[fotoAtual];
+
+    viewerImage.src =
+        foto.url;
+
+    viewerDate.textContent =
+        foto.data;
+
+    viewerPosition.textContent =
+        `${fotoAtual + 1} de ${listaFotos.length}`;
+
+
+    /*
+       Desabilita a seta esquerda
+       quando estamos na primeira foto.
+    */
+
+    viewerPrevious.disabled =
+        fotoAtual === 0;
+
+
+    /*
+       Desabilita a seta direita
+       quando estamos na última foto.
+    */
+
+    viewerNext.disabled =
+        fotoAtual ===
+        listaFotos.length - 1;
+
+}
+
+
+/* =========================================================
+   FOTO ANTERIOR
+========================================================= */
+
+function fotoAnterior() {
+
+    if (fotoAtual <= 0) {
+        return;
+    }
+
+    fotoAtual--;
+
+    mostrarFotoAtual();
+}
+
+
+/* =========================================================
+   PRÓXIMA FOTO
+========================================================= */
+
+function proximaFoto() {
+
+    if (
+        fotoAtual >=
+        listaFotos.length - 1
+    ) {
+        return;
+    }
+
+    fotoAtual++;
+
+    mostrarFotoAtual();
+}
+
+
+/* =========================================================
+   EVENTOS DAS SETAS
+========================================================= */
+
+viewerPrevious.addEventListener(
+    "click",
+    fotoAnterior
+);
+
+viewerNext.addEventListener(
+    "click",
+    proximaFoto
+);
+
+
+/* =========================================================
+   ABRIR VISUALIZADOR
+========================================================= */
+
 function abrirVisualizador(
     imageURL,
     data
 ) {
 
-    viewerImage.src =
-        imageURL;
+    atualizarListaFotos();
 
-    viewerDate.textContent =
-        data;
+    /*
+       Descobre qual foto foi clicada.
+    */
+
+    fotoAtual =
+        listaFotos.findIndex(
+            function (foto) {
+                return foto.url === imageURL;
+            }
+        );
+
+
+    /*
+       Segurança caso não encontre.
+    */
+
+    if (fotoAtual === -1) {
+        fotoAtual = 0;
+    }
+
+    mostrarFotoAtual();
 
     photoViewer.style.display =
         "flex";
-
 }
 
 
@@ -737,11 +941,33 @@ document.addEventListener(
     function (event) {
 
         if (
-            event.key === "Escape"
+            photoViewer.style.display !== "flex"
         ) {
+            return;
+        }
+
+
+        if (event.key === "Escape") {
 
             fecharVisualizador();
 
+            return;
+        }
+
+
+        if (event.key === "ArrowLeft") {
+
+            fotoAnterior();
+
+            return;
+        }
+
+
+        if (event.key === "ArrowRight") {
+
+            proximaFoto();
+
+            return;
         }
 
     }
@@ -844,6 +1070,9 @@ async function excluirFoto(
 
         card.remove();
 
+        atualizarListaFotos();
+
+        atualizarContadorFotos();
 
     } catch (error) {
 

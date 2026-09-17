@@ -1246,6 +1246,7 @@ body {
     cursor: pointer;
 }
 
+
 .friend-picture {
     width: 70px;
     height: 70px;
@@ -1269,6 +1270,12 @@ body {
 
     box-shadow:
         inset 0 0 0 1px #fff;
+
+    background-image: url('images/victor.jpg');
+      background-size: cover; /* Cobre todo o espaço da div */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat;
+
 }
 
 .friend-name {
@@ -1873,3 +1880,151 @@ body {
 .profile-input {
     display: none;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+#photoCount {
+    float: right;
+    font-size: 10px;
+    font-weight: normal;
+    opacity: 0.85;
+}
+
+/* =========================================================
+   NAVEGAÇÃO DO VISUALIZADOR
+========================================================= */
+
+.photoViewer {
+    position: relative;
+}
+
+#fanly {
+    position: relative
+}
+
+.viewer-navigation {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+
+.viewer-nav-button {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 42px;
+    height: 42px;
+
+    border: 2px solid #666;
+
+    background: linear-gradient(
+        #ffffff,
+        #dcdcdc
+    );
+
+    color: #333;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    line-height: 35px;
+
+    cursor: pointer;
+
+    box-shadow:
+        2px 2px 0 #888;
+
+    user-select: none;
+
+    pointer-events: auto;
+}
+
+
+/* SETA ESQUERDA */
+
+.viewer-previous {
+    left: 8px;
+}
+
+
+/* SETA DIREITA */
+
+.viewer-next {
+    right: 8px;
+}
+
+
+/* HOVER */
+
+.viewer-nav-button:hover:not(:disabled) {
+    background: linear-gradient(
+        #ffffff,
+        #eeeeee
+    );
+}
+
+
+/* CLIQUE */
+
+.viewer-nav-button:active:not(:disabled) {
+    box-shadow: none;
+
+    transform:
+        translateY(
+            calc(-50% + 2px)
+        );
+}
+
+
+/* DESABILITADA */
+
+.viewer-nav-button:disabled {
+    opacity: 0.35;
+
+    cursor: default;
+
+    box-shadow:
+        1px 1px 0 #aaa;
+}
+
+
+/* CONTADOR */
+
+.viewer-position {
+    position: absolute;
+
+    bottom: 48px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    min-width: 80px;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #555;
+
+    pointer-events: none;
+}
+
